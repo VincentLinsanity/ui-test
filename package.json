@@ -1,0 +1,28 @@
+{
+  "name": "ui-test",
+  "version": "1.0.0",
+  "description": "a test project",
+  "main": "index.js",
+  "scripts": {
+    "force_eslint": "./node_modules/.bin/eslint . --fix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/VincentLinsanity/ui-test.git"
+  },
+  "keywords": [
+    "node.js"
+  ],
+  "author": "vincent",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/VincentLinsanity/ui-test/issues"
+  },
+  "homepage": "https://github.com/VincentLinsanity/ui-test#readme",
+  "devDependencies": {
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "prettier": "^2.3.2"
+  }
+}
