@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start_psql": "docker run -d -p 5432:5432 --workdir /app --name ui-test_postgres_1 -e POSTGRES_USER='ui_test' -e POSTGRES_DB='ui_test' -e POSTGRES_PASSWORD=password postgres:14.1-alpine && docker cp models ui-test_postgres_1:/app",
+    "create_users": "docker exec -ti ui-test_postgres_1 psql -U ui_test -d ui_test -w password -f /app/models/users.sql",
     "force_eslint": "./node_modules/.bin/eslint . --fix"
   },
   "repository": {
