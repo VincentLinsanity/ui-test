@@ -124,8 +124,8 @@ const libs = {
    * @returns
    */
   postUsersSignin: async (req, res) => {
-    const { acct = "", fullname = "", pwd = "" } = req.body;
-    if (acct === "" || fullname === "" || pwd === "") {
+    const { fullname = "", pwd = "" } = req.body;
+    if (fullname === "" || pwd === "") {
       return res.json({ message: "please proivde enough info" });
     }
     let result = "";
@@ -138,7 +138,7 @@ const libs = {
       if (existUser.pwd !== hmacPassword) {
         return res.json({ message: "invalid login info" });
       }
-      result = helper.signTokenJWT(acct);
+      result = helper.signTokenJWT(existUser.acct);
     } catch (error) {
       logger.info(error);
       return res.send(500);
