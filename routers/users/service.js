@@ -15,6 +15,25 @@ const libs = {
     return res.json({ result });
   },
 
+  putUsers: async (req, res) => {
+    const { acct = "" } = req.headers;
+    const { fullname = "" } = req.body;
+    if (fullname === "") {
+      return res.json({ message: "please proivde fullname" });
+    }
+    let result = {};
+    try {
+      result = await helper.usersUpdateOne(acct, { fullname });
+    } catch (error) {
+      if (error.name === "SequelizeUniqueConstraintError") {
+        return res.send("duplicate acct or fullname");
+      }
+      logger.info(error);
+      return res.send(500);
+    }
+    return res.json({ result });
+  },
+
   deleteUsers: async (req, res) => {
     const { acct = "" } = req.headers;
     let result = {};

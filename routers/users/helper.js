@@ -23,6 +23,16 @@ const libs = {
     return result;
   },
 
+  usersUpdateOne: async (acct, update) => {
+    const result = await sequelize.models.Users.update(
+      {
+        update
+      },
+      { where: { acct: { [Op.eq]: acct } } }
+    );
+    return result;
+  },
+
   usersDeleteOne: async (acct) => {
     const result = await sequelize.models.Users.destroy({
       where: { acct: { [Op.eq]: acct } }
