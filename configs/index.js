@@ -10,7 +10,9 @@ const config = {
     dir: path.resolve(pathBase, "log")
   },
   private_key: fs.readFileSync(path.join(__dirname, "./jwtRS256.key")),
-  public_key: fs.readFileSync(path.join(__dirname, "./jwtRS256.key.pub"))
+  public_key: fs.readFileSync(path.join(__dirname, "./jwtRS256.key.pub")),
+  server_key: fs.readFileSync(path.join(__dirname, "./server.key")),
+  server_cert: fs.readFileSync(path.join(__dirname, "./server.crt"))
 };
 
 let overrides = {};
