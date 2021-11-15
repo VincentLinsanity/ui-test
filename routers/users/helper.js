@@ -16,8 +16,11 @@ const libs = {
     return hash;
   },
 
-  usersFindAll: async (acct) => {
+  usersFindAll: async (order, orderby, offset, limit) => {
     const result = await sequelize.models.Users.findAll({
+      offset: offset,
+      limit: limit,
+      order: [[order, orderby]],
       attributes: ["fullname", "acct"]
     });
     return result;

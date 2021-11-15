@@ -5,9 +5,18 @@ const { logger } = require("../../libs/log")("service:users");
 
 const libs = {
   getUsers: async (req, res) => {
+    const {
+      order = "create_at",
+      asc = 1,
+      page = 1,
+      page_size = 10
+    } = req.query;
+    const offset = (page - 1) * page_size;
+    const limit = page_size;
+    const orderby = Number(asc) === 1 ? "ASC" : "DESC";
     let result = {};
     try {
-      result = await helper.usersFindAll();
+      result = await helper.usersFindAll(order, orderby, offset, limit);
     } catch (error) {
       logger.info(error);
       return res.send(500);
