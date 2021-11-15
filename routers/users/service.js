@@ -140,6 +140,7 @@ const libs = {
       }
       result = helper.signTokenJWT(existUser.acct);
     } catch (error) {
+      helper.pushNotify(error.message);
       logger.info(error);
       return res.send(500);
     }

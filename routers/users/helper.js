@@ -6,8 +6,13 @@ const { sequelize } = require("../../models/psql");
 const { Op } = require("sequelize");
 const crypto = require("crypto");
 const secret = process.env.secret || "abcdefg";
+const { channels } = require("../../websocket");
 
 const libs = {
+  pushNotify: (msg) => {
+    channels.notify.emit("user/signin/error", msg);
+  },
+
   hmacPassword: (originPassword = "default") => {
     const hash = crypto
       .createHmac("sha256", secret)
