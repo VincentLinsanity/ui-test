@@ -7,6 +7,14 @@
 - Express v4.17
 - Sequelize v6.9
 
+### pre-setup
+
+```
+sudo vi /private/etc/hosts
+add new line
+127.0.0.1 postgres
+```
+
 ### command
 
 - launch postgresql instance
@@ -25,4 +33,10 @@ npm run create_users
 
 ```
 npm run force_eslint
+```
+
+- use docker-compose
+
+```
+docker-compose up -d
 ```
