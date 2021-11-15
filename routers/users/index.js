@@ -7,4 +7,6 @@ const middleware = require("./middleware");
 
 router.get("/", middleware.verifyTokenJWT, service.getUsers);
 
+router.get("/search", middleware.verifyTokenJWT, service.getUsersSearch);
+
 module.exports = router;
