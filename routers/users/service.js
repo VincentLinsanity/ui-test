@@ -12,7 +12,18 @@ const libs = {
       logger.info(error);
       return res.send(500);
     }
+    return res.json({ result });
+  },
 
+  deleteUsers: async (req, res) => {
+    const { acct = "" } = req.headers;
+    let result = {};
+    try {
+      result = await helper.usersDeleteOne(acct);
+    } catch (error) {
+      logger.info(error);
+      return res.send(500);
+    }
     return res.json({ result });
   },
 

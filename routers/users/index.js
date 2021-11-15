@@ -7,6 +7,8 @@ const middleware = require("./middleware");
 
 router.get("/", middleware.verifyTokenJWT, service.getUsers);
 
+router.delete("/", middleware.verifyTokenJWT, service.deleteUsers);
+
 router.get("/search", middleware.verifyTokenJWT, service.getUsersSearch);
 
 router.get("/detail", middleware.verifyTokenJWT, service.getUsersDetail);

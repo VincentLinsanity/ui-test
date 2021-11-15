@@ -16,9 +16,16 @@ const libs = {
     return hash;
   },
 
-  usersFindAll: async () => {
+  usersFindAll: async (acct) => {
     const result = await sequelize.models.Users.findAll({
-      attributes: ["fullname"]
+      attributes: ["fullname", "acct"]
+    });
+    return result;
+  },
+
+  usersDeleteOne: async (acct) => {
+    const result = await sequelize.models.Users.destroy({
+      where: { acct: { [Op.eq]: acct } }
     });
     return result;
   },
