@@ -24,6 +24,15 @@ const routes = {
       app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
     }
 
+    if (process.env.ENV === "prod") {
+      const csurf = require("csurf");
+      const csrf = csrf({ cookie: true });
+      app.use(csrf);
+
+      const cors = require("cors");
+      app.use(cors());
+    }
+
     app.use(router);
   }
 };
