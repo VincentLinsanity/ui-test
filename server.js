@@ -25,10 +25,13 @@ process.on("uncaughtException", (error) => {
   console.log(error);
 });
 
+const { setupWebsocket } = require("./websocket");
+
 const main = async () => {
   try {
     await psql.authenticate();
     await psql.initial();
+    await setupWebsocket();
   } catch (error) {
     logger.debug(error.message);
   }
