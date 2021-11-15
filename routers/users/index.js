@@ -9,4 +9,6 @@ router.get("/", middleware.verifyTokenJWT, service.getUsers);
 
 router.get("/search", middleware.verifyTokenJWT, service.getUsersSearch);
 
+router.get("/detail", middleware.verifyTokenJWT, service.getUsersDetail);
+
 module.exports = router;

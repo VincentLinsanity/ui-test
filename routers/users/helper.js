@@ -21,6 +21,14 @@ const libs = {
     return result;
   },
 
+  usersFindOneDetailByFullname: async (fullname) => {
+    const result = await sequelize.models.Users.findOne({
+      where: { fullname: { [Op.eq]: fullname } },
+      attributes: ["acct", "fullname", "create_at", "updated_at"]
+    });
+    return result;
+  },
+
   signTokenJWT: (acct = "") => {
     const token = jwt.sign({ acct }, config.private_key, {
       algorithm: "RS256"
