@@ -1,0 +1,11 @@
+{
+  "psql": {
+    "master": {
+      "host": "127.0.0.1",
+      "port": "5432",
+      "database": "ui_test",
+      "user": "ui_test",
+      "password": "password"
+    }
+  }
+}
