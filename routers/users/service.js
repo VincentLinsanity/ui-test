@@ -62,7 +62,7 @@ const libs = {
     }
     let result = {};
     try {
-      result = await helper.usersFindAllByFulname(fullname);
+      result = await helper.usersFindAllByFullname(fullname);
     } catch (error) {
       logger.info(error);
       return res.send(500);

@@ -43,7 +43,7 @@ const libs = {
     return result;
   },
 
-  usersFindAllByFulname: async (fullname) => {
+  usersFindAllByFullname: async (fullname) => {
     const result = await sequelize.models.Users.findAll({
       where: { fullname: { [Op.eq]: fullname } },
       attributes: ["fullname"]

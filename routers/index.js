@@ -18,6 +18,12 @@ const routes = {
       app.use(`/api/${filePath}`, router);
     });
 
+    if (process.env.ENV !== "prod") {
+      const swaggerSpec = require("../configs/swagger");
+      const swaggerUi = require("swagger-ui-express");
+      app.use("/api/docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+    }
+
     app.use(router);
   }
 };
