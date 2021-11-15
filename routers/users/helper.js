@@ -4,8 +4,18 @@ const jwt = require("jsonwebtoken");
 const config = require("../../configs");
 const { sequelize } = require("../../models/psql");
 const { Op } = require("sequelize");
+const crypto = require("crypto");
+const secret = process.env.secret || "abcdefg";
 
 const libs = {
+  hmacPassword: (originPassword = "default") => {
+    const hash = crypto
+      .createHmac("sha256", secret)
+      .update(originPassword)
+      .digest("hex");
+    return hash;
+  },
+
   usersFindAll: async () => {
     const result = await sequelize.models.Users.findAll({
       attributes: ["fullname"]
@@ -26,6 +36,11 @@ const libs = {
       where: { fullname: { [Op.eq]: fullname } },
       attributes: ["acct", "fullname", "create_at", "updated_at"]
     });
+    return result;
+  },
+
+  usersCreate: async (data) => {
+    const result = await sequelize.models.Users.create(data);
     return result;
   },
 

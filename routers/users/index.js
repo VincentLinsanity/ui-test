@@ -11,4 +11,6 @@ router.get("/search", middleware.verifyTokenJWT, service.getUsersSearch);
 
 router.get("/detail", middleware.verifyTokenJWT, service.getUsersDetail);
 
+router.post("/signup", service.postUsersSignup);
+
 module.exports = router;

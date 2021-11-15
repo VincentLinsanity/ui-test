@@ -30,13 +30,15 @@ const initial = async () => {
     {
       acct: {
         type: DataTypes.STRING,
-        primaryKey: true
+        primaryKey: true,
+        unique: true
       },
       pwd: {
         type: DataTypes.STRING
       },
       fullname: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        unique: true
       }
     },
     {

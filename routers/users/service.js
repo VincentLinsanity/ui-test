@@ -46,6 +46,36 @@ const libs = {
     }
 
     return res.json({ result });
+  },
+
+  /**
+   * 用戶註冊service
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  postUsersSignup: async (req, res) => {
+    const { acct = "", fullname = "", pwd = "" } = req.body;
+    if (acct === "" || fullname === "" || pwd === "") {
+      return res.json({ message: "please proivde enough info" });
+    }
+    let result = {};
+    try {
+      const hmacPassword = helper.hmacPassword(pwd);
+      result = await helper.usersCreate({
+        acct,
+        pwd: hmacPassword,
+        fullname
+      });
+    } catch (error) {
+      if (error.name === "SequelizeUniqueConstraintError") {
+        return res.send("duplicate acct or fullname");
+      }
+      logger.info(error);
+      return res.send(500);
+    }
+
+    return res.json({ result });
   }
 };
 
