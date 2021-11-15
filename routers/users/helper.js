@@ -39,6 +39,13 @@ const libs = {
     return result;
   },
 
+  usersFindOneByFullnameAdmin: async (fullname) => {
+    const result = await sequelize.models.Users.findOne({
+      where: { fullname: { [Op.eq]: fullname } }
+    });
+    return result;
+  },
+
   usersCreate: async (data) => {
     const result = await sequelize.models.Users.create(data);
     return result;

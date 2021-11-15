@@ -76,6 +76,35 @@ const libs = {
     }
 
     return res.json({ result });
+  },
+
+  /**
+   * 用戶登入service
+   * @param {*} req
+   * @param {*} res
+   * @returns
+   */
+  postUsersSignin: async (req, res) => {
+    const { acct = "", fullname = "", pwd = "" } = req.body;
+    if (acct === "" || fullname === "" || pwd === "") {
+      return res.json({ message: "please proivde enough info" });
+    }
+    let result = "";
+    try {
+      const existUser = await helper.usersFindOneByFullnameAdmin(fullname);
+      if (!existUser) {
+        return res.json({ message: "user info not exist" });
+      }
+      const hmacPassword = helper.hmacPassword(pwd);
+      if (existUser.pwd !== hmacPassword) {
+        return res.json({ message: "invalid login info" });
+      }
+      result = helper.signTokenJWT(acct);
+    } catch (error) {
+      logger.info(error);
+      return res.send(500);
+    }
+    return res.json({ result });
   }
 };
 
