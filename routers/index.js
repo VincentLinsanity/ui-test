@@ -30,7 +30,13 @@ const routes = {
       app.use(csrf);
 
       const cors = require("cors");
-      app.use(cors());
+      const corsOptions = {
+        origin: [process.env.domain],
+        methods: "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
+        allowedHeaders: ["Content-Type", "Authorization"]
+      };
+
+      app.use(cors(corsOptions));
     }
 
     app.use(router);
